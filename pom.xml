@@ -61,6 +61,28 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <configuration>
+                　　<imageName>192.168.1.157:30082/${project.artifactId}:${project.version}</imageName>
+                　　<dockerHost>http://192.168.1.157:30081</dockerHost>  #修改成自己docker所在服务器ip
+                　　<baseImage>java:8</baseImage>
+                　  <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]</entryPoint>
+                　　<resources>
+                    　　<resource>
+                    　　　　<targetPath>/</targetPath>
+                    　　   <directory>${project.build.directory}</directory>
+                    　　   <include>${project.build.finalName}.jar</include>
+                　　　　</resource>
+                　　</resources>
+                    <pushImage>true</pushImage>
+                    <registryUrl>192.168.1.157:30082</registryUrl>
+
+                </configuration>
+
+            </plugin>
         </plugins>
     </build>
 
